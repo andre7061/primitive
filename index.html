@@ -22,10 +22,12 @@
         <p>
             <label id="userName" class="form__label form__label-name" for="name">Введите имя:</label>
             <input class="form__input" type="text" name="name" id="name" required />
+            <span class="input_error">Имя может содержать только символы кириллицы, дефис и пробел</span>
         </p>
         <p>
             <label id="userEmail" class="form__label" for="email">Введите email:</label>
-            <input class="form__input" type="email" name="email" id="email" required />
+            <input class="form__input" type="text" name="email" id="email" required />
+            <span class="input_error">можно ввести только латинские буквы, цифры и обязательно должны присутствовать символы «@» и «.», после «.» должно быть не менее 2-х символов.</span>
         </p>
         <p>
             <label id="userPasword" class="form__label" for="password">Введите пароль:</label>

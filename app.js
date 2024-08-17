@@ -5,14 +5,35 @@ const doublePassword = registrForm.querySelector("#password2");
 const city = registrForm.querySelector("#city-select");
 const beck = document.querySelector('.beckend');
 const spans = beck.querySelectorAll('.beckend__span');
-const button = document.querySelector('#btn')
+const button = document.querySelector('#btn');
+const name = document.querySelector('#name');
+const email = document.querySelector('#email');
+
+
+const regex = /^[А-Яа-яЁё\s-]+$/;
+const regexEmail = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+
+name.addEventListener('input', function (e) {
+    const value = e.target
+    showError(regex, value)
+})
+
+function showError(reg, target) {
+    if (!reg.test(target.value)) {
+        target.nextElementSibling.classList.add("input_error_activ");
+        target.classList.add("error");
+    } else {
+        target.nextElementSibling.classList.remove("input_error_activ");
+        target.classList.remove("error");
+    }
+}
 
 
 
 
 function isPassword(e) {
     e.preventDefault();
-    if (password.value !== doublePassword.value) {
+    if (password.value !== doublePassword.value && regex.test(name.value)) {
         doublePassword.classList.add("error");
         doublePassword.nextElementSibling.classList.add("input_error_activ");
         return false;
@@ -23,6 +44,15 @@ function isPassword(e) {
     beck.querySelector('.beckend__span-language').textContent = city.value
 }
 registrForm.addEventListener("submit", isPassword);
+
+name.addEventListener('input', function (e) {
+    const value = e.target
+    showError(regex, value)
+})
+email.addEventListener('change', function (e) {
+    const value = e.target
+    showError(regexEmail, value)
+})
 
 
 i18next.init({
@@ -60,18 +90,18 @@ i18next.init({
         }
 
     },
-    function (err,t){
+    function(err, t) {
         document.getElementById('userName').textContent = t('key')
     }
-    
+
 });
 
 
-//const lang = i18next.changeLanguage == 'en' ? 'ru' : 'en'
 
 
-button.addEventListener('click',()=>{
-   const lang = i18next.language === 'en' ? 'ru' : 'en'
+
+button.addEventListener('click', () => {
+    const lang = i18next.language === 'en' ? 'ru' : 'en'
     i18next.changeLanguage(lang, (err, t) => {
         if (err) return console.log('something went wrong loading', err);
         document.getElementById('userName').textContent = t('key')
